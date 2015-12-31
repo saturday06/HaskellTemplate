@@ -65,7 +65,7 @@ writeAccW acc x
   | otherwise = do
     tell $ "acc=" ++ show acc ++ ",x=" ++ show x ++ " | "
     return $ acc + x
-
+{--
 newtype MyMaybeT m a = MyMaybeT { runMyMaybeT :: m (Maybe a) }
 
 instance Monad m => Monad (MyMaybeT m) where
@@ -73,7 +73,7 @@ instance Monad m => Monad (MyMaybeT m) where
   (>>=) x y = MyMaybeT $ case x of
      Nothing -> return
      Just a -> (y a)
-
+-}
 {--
 writeAccM :: Int -> Int -> MyMaybeT (Writer String) Int
 writeAccM acc x

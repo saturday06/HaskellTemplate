@@ -10,7 +10,7 @@ dependencies:
 
   override:
     - |
-      stack_version=0.1.10.0
+      stack_version=1.0.0
       rm -f stack/current
       mkdir -p stack/$stack_version
       ln -s $PWD/stack/$stack_version $PWD/stack/current
