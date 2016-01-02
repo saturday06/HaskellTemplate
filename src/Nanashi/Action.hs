@@ -1,0 +1,2 @@
+module Nanashi.Action where
+

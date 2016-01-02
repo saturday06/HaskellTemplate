@@ -1,12 +1,13 @@
-module NanashiSpec where
+module Nanashi.FirstSpec where
 
-import Nanashi
+import Nanashi.First
 import Test.Hspec    (Spec, describe, it, shouldBe)
 import Data.Function ((&))
 import Data.Char
 import Control.Monad
 import Control.Monad.Writer
 import Control.Monad.Trans.Maybe
+import Debug.Trace
 
 spec :: Spec
 spec = do
@@ -56,3 +57,27 @@ spec = do
     -- (runWriterT $ foldM writeAccW 0 [2,8,3,1]) `shouldBe` Just (14, "acc=0,x=2 | acc=2,x=8 | acc=10,x=3 | acc=13,x=1 | ")
     -- (runWriter $ runMyMaybeT $ foldM writeAccM 0 [2,8,3,1]) `shouldBe` (Just 14, "acc=0,x=2 | acc=2,x=8 | acc=10,x=3 | acc=13,x=1 | ")
     fib 1 `shouldBe` 1
+
+  it "inserts" $ do
+    insert 1 [2] `shouldBe` [1, 2]
+    insert 2 [1] `shouldBe` [1, 2]
+    insert 2 [1, 3] `shouldBe` [1, 2, 3]
+
+  it "isorts" $ do
+    isort [4, 6, 9, 8, 3, 5, 1, 7, 2] `shouldBe` [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  it "bubblesort" $ do
+    bubblesort [8, 6, 9, 4] `shouldBe` [4, 6, 8, 9]
+
+  it "merges" $ do
+    merge [1] [2] `shouldBe` [1, 2]
+    merge [2] [1] `shouldBe` [1, 2]
+    merge2 [1] `shouldBe` [1]
+
+  it "mergesort" $ do
+    bubble [4, 3, 2, 1] `shouldBe` [1, 4, 3, 2]
+    mergesort [8, 6, 9, 4] `shouldBe` [4, 6, 8, 9]
+    [x * 2 | x <- [1], x < 5] `shouldBe` [2]
+
+  it "pita" $ do
+    pita `shouldBe` [(3,4,5),(5,12,13),(6,8,10),(8,15,17),(9,12,15),(12,16,20)]

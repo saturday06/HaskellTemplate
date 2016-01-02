@@ -1,10 +1,11 @@
-module Nanashi where
+module Nanashi.First where
 
 import Data.Function ((&))
 import Data.Char
 import Control.Monad
 import Control.Monad.Writer
 import Control.Monad.Trans.Maybe
+import Debug.Trace
 
 fib x = case x of
   1 -> 1
@@ -65,6 +66,65 @@ writeAccW acc x
   | otherwise = do
     tell $ "acc=" ++ show acc ++ ",x=" ++ show x ++ " | "
     return $ acc + x
+
+insert :: Int -> [Int] -> [Int]
+insert x [] = [x] -- trace ("insert " ++ show x ++ " []") $ [x]
+insert x (y:ys)
+  | y > x = x:y:ys -- trace ("insert " ++ show x ++ " " ++ show (y:ys)) $ x:y:ys
+  | otherwise = y:(insert x ys)
+
+
+isort :: [Int] -> [Int]
+isort [] = []
+isort (x:xs) = insert x (isort xs) -- trace isortDebug $ insert x (isort xs)
+  where
+    isortDebug = "isort " ++ show (x:xs) ++ " = " ++ "insert " ++ show x ++ " (isort " ++ show xs ++ ")"
+
+test x = trace ("test " ++ show x) x
+
+sorted [] = True
+sorted (x:[y]) = x <= y
+sorted (x:y:rest) = (x <= y) && sorted (y:rest)
+
+bubblesort [x] = [x]
+bubblesort list = x:(bubblesort xs)
+  where
+    (x:xs) = bubble list
+
+bubble [x] = [x]
+bubble (x:xs) = if x < y then x:y:ys else y:x:ys
+  where
+    (y:ys) = bubble xs
+
+bubble l = l
+
+merge :: [Int] -> [Int] -> [Int]
+merge l r = case (take 1 l, take 1 r, drop 1 l, drop 1 r) of
+  ([lhead], [rhead], ltail, rtail) ->
+    if lhead < rhead then
+      lhead:(merge ltail r)
+    else
+      rhead:(merge l rtail)
+  _ -> l ++ r
+
+merge2 (x:xs) = trace (show x ++ ":" ++ show xs) $ (x:xs)
+
+mergesort :: [Int] -> [Int]
+mergesort list =
+  if length list <= 1 then
+    list
+  else
+    merge (mergesort left) (mergesort right)
+  where
+    halflen = length list `div` 2
+    left = take halflen list
+    right = drop halflen list
+
+pita :: [(Int, Int, Int)]
+pita = [(x, y, z) |
+    x <- [1..20], y <- [x..20], z <- [y..20],
+    x * x + y * y == z * z]
+
 {--
 newtype MyMaybeT m a = MyMaybeT { runMyMaybeT :: m (Maybe a) }
 
