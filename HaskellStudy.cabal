@@ -17,6 +17,8 @@ executable HaskellTemplate
                , relational-record
                , transformers
                , dlist
+               , random
+               , array
   if true
     build-depends: hspec
                  , hspec-discover
@@ -39,6 +41,8 @@ test-suite spec
                , template-haskell
                , names-th
                , dlist
+               , random
+               , array
                , relational-record
                , transformers
                , hspec
