@@ -1,4 +1,4 @@
-name:              HaskellStudy
+name:              HaskellTemplate
 version:           1.0
 Build-Type:        Simple
 cabal-version:     >= 1.18
@@ -19,6 +19,7 @@ executable HaskellTemplate
                , dlist
                , random
                , array
+               , here
   if true
     build-depends: hspec
                  , hspec-discover
@@ -43,6 +44,7 @@ test-suite spec
                , dlist
                , random
                , array
+               , here
                , relational-record
                , transformers
                , hspec
