@@ -8,11 +8,8 @@ dependencies:
     - ".stack-work"
 
   override:
-    - |
-      ./stackw test --only-dependencies --install-ghc
+    - ./stackw test --only-dependencies --install-ghc
 
 test:
   override:
-    - |
-      cp config/circleci-settings.yml config/test-settings.yml
-      ./stackw test
+    - ./stackw test
