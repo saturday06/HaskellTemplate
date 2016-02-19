@@ -1,4 +1,4 @@
 # stack version: 1.0.2
 flags: {}
-extra-deps:
+extra-deps: []
 resolver: lts-5.1
